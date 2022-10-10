@@ -27,8 +27,13 @@
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
               <div class="info-box blue-bg">
                 <i class="fa fa-cloud-download"></i>
+                @if ($categories->count()>0)
+                <div class="count">{{$categories->count()}}</div> 
+                @else
                 <div class="count">0</div>
-                <div class="title">Downloads</div>
+                @endif
+                
+                <div class="title">categories</div>
               </div>
               <!--/.info-box-->
             </div>
@@ -37,7 +42,7 @@
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
               <div class="info-box brown-bg">
                 <i class="fa fa-users"></i>
-              <div class="count">300</div>
+              <div class="count">{{$users->count()}}</div>
                 <div class="title">Users</div>
               </div>
               <!--/.info-box-->
@@ -48,7 +53,8 @@
               <div class="info-box dark-bg">
                 <i class="fa fa-question"></i>
                 {{-- <div class="count">{{count($data['all_questions'])}}</div> --}}
-                <div class="title">Questions</div>
+                <div class="countn">{{$forums->count()}}</div>
+                <div class="title">Forums</div>
               </div>
               <!--/.info-box-->
             </div> 
@@ -56,9 +62,9 @@
   
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
               <div class="info-box green-bg">
-                <i class="fa fa-cubes"></i>
-                <div class="count">1.426</div>
-                <div class="title">Stock</div>
+                <i class="fa fa-tasks"></i>
+                <div class="count">{{$discussions->count()}}</div>
+                <div class="title">topics</div>
               </div>
               <!--/.info-box-->
             </div> 
@@ -92,8 +98,8 @@
                       </tr>
                     </thead>
                     <tbody>
-                        {{-- @if (count($data['users'])> 0)
-                            @foreach ($data['users'] as $user)
+                        @if (count($users)> 0)
+                            @foreach ($users as $user)
                             <tr>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
@@ -107,11 +113,11 @@
                                
                               </tr>
                             @endforeach
-                        @endif --}}
+                        @endif
                     </tbody>
                   </table>
 
-                  {{-- {{ $data['users']->links() }} --}}
+                  {{ $users->links() }}
                 </div>
   
               </div>

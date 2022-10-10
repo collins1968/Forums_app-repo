@@ -12,7 +12,13 @@
   <title>DRO -Digital Agency</title>
 
   <!-- Bootstrap CSS -->
-  <link href="{{asset('admin/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+/>
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- bootstrap theme -->
   <link href="{{asset('admin/css/bootstrap-theme.css')}}" rel="stylesheet">
   <!--external css-->
@@ -36,7 +42,7 @@
   <link href="{{asset('admin/css/jquery-ui-1.10.4.min.css')}}" rel="stylesheet">
 
   <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
-
+{{-- @toastr_css --}}
 </head>
 
 <body>

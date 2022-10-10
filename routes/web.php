@@ -91,3 +91,8 @@ route::get('client/topics/reply/{id}', 'App\Http\Controllers\discussionControlle
 
 route::get('/updates', 'App\Http\Controllers\UserController@updates');
 route::post('User/update/{id}', 'App\Http\Controllers\UserController@update')->name('user.update');
+
+route::get('/dashboard/users/{id}', 'App\Http\Controllers\DashboardController@show');
+route::post('/dashboard/user/{id}', 'App\Http\Controllers\DashboardController@destroy')->name('user.delete');
+
+route::get('/dashboard/users', 'App\Http\Controllers\DashboardController@users');

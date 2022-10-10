@@ -103,39 +103,41 @@
 
 
                                 <!-- Post -->
-                                <div class="post">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" height = "50" widht= "50" src={{asset('images/th.jpeg')}} alt="user image">
-                                        <span class="username">
-                                            <a href="#">You</a>
-                                            <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                                        </span>
-                                        <span class="description">started disscussion at - {{$latest_user_post->created_at}}</span>
-                                    </div>
-                                    <!-- /.user-block -->
-                                    @if ($latest_user_post)
-                                    <p>
-                                        {{$latest_user_post->desc}}  
-                                      </p> 
-                                    @else
-                                    <p>
-                                        You have not started any discussions 
-                                      </p>
-                                    @endif
+                          @if ($latest_user_post)
+                          <div class="post">
+                            <div class="user-block">
+                                <img class="img-circle img-bordered-sm" height = "50" widht= "50" src={{asset('images/th.jpeg')}} alt="user image">
+                                <span class="username">
+                                    <a href="#">You</a>
+                                    <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+                                </span>
+                                <span class="description">started disscussion at - {{$latest_user_post->created_at}}</span>
+                            </div>
+                            <!-- /.user-block -->
+                            @if ($latest_user_post)
+                            <p>
+                                {{$latest_user_post->desc}}  
+                              </p> 
+                            @else
+                            <p>
+                                You have not started any discussions 
+                              </p>
+                            @endif
 
-                                    <p>
-                                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-eye mr-1"></i> {{$latest_user_post->views}} views</a>
-                                        <a href="#" class="link-black text-sm"><i class="fa fa-reply"></i> {{$latest_user_post->replies->count()}} replies</a>
-                                        <span class="float-right">
-                                           
-                                            <a href="{{route('topic.delete', $latest_user_post->id)}}" class="link-black text-sm">
-                                              <button class="btn btn-danger"> <i class="fa fa-trash"></i> </button> 
-                                            </a>
-                                        </span>
-                                    </p>
-
+                            <p>
+                                <a href="#" class="link-black text-sm mr-2"><i class="fas fa-eye mr-1"></i> {{$latest_user_post->views}} views</a>
+                                <a href="#" class="link-black text-sm"><i class="fa fa-reply"></i> {{$latest_user_post->replies->count()}} replies</a>
+                                <span class="float-right">
                                    
-                                </div>
+                                    <a href="{{route('topic.delete', $latest_user_post->id)}}" class="link-black text-sm">
+                                      <button class="btn btn-danger"> <i class="fa fa-trash"></i> </button> 
+                                    </a>
+                                </span>
+                            </p>
+
+                           
+                        </div>
+                          @endif
                                 <br>
                                 <!-- /.post -->
                               

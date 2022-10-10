@@ -112,7 +112,7 @@ class categorycontroller extends Controller
         $image->move($dir, $new_name);
         } 
 
-        $category = category::fid($id);
+        $category = category::find($id);
         if($request->title){
              $category->desc = $request->desc;
         }
