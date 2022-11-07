@@ -6,22 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\models\user;
+use App\models\discussion;
 
-class NewUser extends Notification
+class NewReply extends Notification
 {
     use Queueable;
-
-    public $user;
-
+    public $reply;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($reply)
     {
-        //
-       $this->user = $user;
+        $this->reply = $reply;
     }
 
     /**
@@ -35,21 +34,23 @@ class NewUser extends Notification
         return ['database'];
     }
 
+   
     /**
-     * Get the mail representation of the notification.
+     * Get the array representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return array
      */
-    
     public function toDatabase($notifiable)
     {
+        $user = user::find($this->reply->user_id);
+        $discussion = discussion::find($this->reply->discussion_id);
+
         return [
-            //
-            'name' =>user->name,
-            'email'=>user->email,
-            'message'=>"new user has registered to the forum",
-            'type'=>1
+            'name'=>$user->name,
+            'email'=>$user->email,
+            'message'=>$user->name." replied to ".$discussion->title,
+            'type'=>2
         ];
     }
 }

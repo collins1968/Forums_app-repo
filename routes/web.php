@@ -96,3 +96,8 @@ route::get('/dashboard/users/{id}', 'App\Http\Controllers\DashboardController@sh
 route::post('/dashboard/user/{id}', 'App\Http\Controllers\DashboardController@destroy')->name('user.delete');
 
 route::get('/dashboard/users', 'App\Http\Controllers\DashboardController@users');
+
+#notifications route
+route::get('/dashboard/notifications', 'App\Http\Controllers\DashboardController@notifications')->name('notifications');
+route::get('/dashboard/notifications/mark-as-read/{id}', 'App\Http\Controllers\DashboardController@markAsRead')->name('notifications.read');
+route::get('/dashboard/notifications/delete/{id}', 'App\Http\Controllers\DashboardController@notificationsDelete')->name('notifications.delete');

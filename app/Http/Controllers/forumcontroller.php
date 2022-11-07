@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\category;
 use App\Models\Forum;
+use App\Models\user;
+use App\Notifications\NewForum;
 use Illuminate\Support\Facades\Session;
 
 
@@ -41,6 +43,12 @@ class forumcontroller extends Controller
     public function store(Request $request)
     {
         forum::create($request->all());
+
+        $LatestForum = forum::latest()->first();
+        $admins = User::where('is_admin', 1)->get();
+        foreach($admins as $admin){
+        $admin->notify(new NewForum($LatestForum));
+        }
 
         session::flash('message', 'forum created successfully');
         session::flash('alert-class', 'alert-success');

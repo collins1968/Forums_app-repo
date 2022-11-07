@@ -6,22 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\user;
 
-class NewUser extends Notification
+class NewTopic extends Notification
 {
     use Queueable;
-
-    public $user;
+    public $topic;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($topic)
     {
-        //
-       $this->user = $user;
+        $this->topic = $topic;
     }
 
     /**
@@ -36,20 +35,19 @@ class NewUser extends Notification
     }
 
     /**
-     * Get the mail representation of the notification.
+     * Get the array representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return array
      */
-    
     public function toDatabase($notifiable)
     {
+        $user = user::find($this->topic->user_id);
         return [
-            //
-            'name' =>user->name,
-            'email'=>user->email,
-            'message'=>"new user has registered to the forum",
-            'type'=>1
+            'name'=>$user->name,
+            'email'=>$user->email,
+            'message'=>"new topic created: ".$this->topic->title,
+            'type'=>2
         ];
     }
 }

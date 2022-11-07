@@ -6,22 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\user;
 
-class NewUser extends Notification
+class NewForum extends Notification
 {
     use Queueable;
-
-    public $user;
+    public $forum;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($forum)
     {
-        //
-       $this->user = $user;
+        $this->forum = $forum;
     }
 
     /**
@@ -32,24 +31,19 @@ class NewUser extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['Database'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    
+   
     public function toDatabase($notifiable)
     {
+        $user = user::find($this->forum->user_id);
+        // $category = category::find($this->category->category_id);
         return [
-            //
-            'name' =>user->name,
-            'email'=>user->email,
-            'message'=>"new user has registered to the forum",
-            'type'=>1
+            'name'=>$user->name,
+            'email'=>$user->email,
+            'message'=>$user->name." created this forum: ".$this->forum->title,
+            'type'=>4
         ];
     }
 }

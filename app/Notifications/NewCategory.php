@@ -6,22 +6,23 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\category;
+use App\Models\User;
 
-class NewUser extends Notification
+
+class NewCategory extends Notification
 {
     use Queueable;
-
-    public $user;
+    public $category;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($category)
     {
-        //
-       $this->user = $user;
+        $this->category = $category;
     }
 
     /**
@@ -32,24 +33,19 @@ class NewUser extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['Database'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    
+   
     public function toDatabase($notifiable)
     {
+        $user = user::find($this->category->user_id);
+        // $category = category::find($this->category->category_id);
         return [
-            //
-            'name' =>user->name,
-            'email'=>user->email,
-            'message'=>"new user has registered to the forum",
-            'type'=>1
+            'name'=>$user->name,
+            'email'=>$user->email,
+            'message'=>$user->name." created this category: ".$this->category->title,
+            'type'=>3
         ];
     }
 }

@@ -62,18 +62,28 @@
                           <span>Dashboard</span>
                       </a>
           </li>
-          <li class="sub-menu">
+          {{-- <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="fa fa-edit"></i>
                           <span>Actions</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
-            <ul class="sub">
-              <li><a class="" href="{{route('category.new')}}">create category</a></li>
-              <li><a class="" href="{{route('forum.new')}}">create forum</a></li>
+            <ul class="sub"> --}}
+         <li>
+          <a class="" href="{{route('category.new')}}">
+            <i class = "fa fa-plus"></i>
+            <span>create category</span>
+
+            </a>
+        </li>
+         <li>
+          <a class="" href="{{route('forum.new')}}">
+            <i class= "fa fa-plus"></i>
+            <span>create forum</span>
+           </a>
+        </li>
               
-            </ul>
-          </li>
+           
          <li>
             <a class="" href="/dashboard/users">
                           <i class="fa fa-users"></i>

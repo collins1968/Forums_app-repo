@@ -43,4 +43,25 @@ class DashboardController extends Controller
         toastr()->info('User deleted successfully');
         return back();
      }
+
+     public function notifications(){
+      $notifications = auth()->user()->notifications()->where('read_at', null)->get();
+      
+      return view('admin.pages.notifications', compact('notifications'));
+    }
+     public function markAsRead($id){
+      $notification = auth()->user()->notifications()->where('id', $id)->first();
+      $notification->markAsRead();
+      toastr()->info('Notification marked as read');
+      return back();
+
+
+    }
+     public function notificationsDelete($id){
+      $notification = auth()->user()->notifications()->where('id', $id)->first();
+      $notification->delete();
+      toastr()->info('Notification deleted successfully');
+      return back();
+      
+   }
 }

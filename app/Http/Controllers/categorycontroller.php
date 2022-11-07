@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\Session;
+use App\Models\User;
+use App\Notifications\NewCategory;
 class categorycontroller extends Controller
 {
     /**
@@ -56,6 +58,13 @@ class categorycontroller extends Controller
         $category->user_id = auth()->id();
         $category->image = $new_name;
         $category->save();
+
+        $LatestCategory = Category::latest()->first();
+        $admins = User::where('is_admin', 1)->get();
+        foreach($admins as $admin){
+        $admin->notify(new NewCategory($LatestCategory));
+        }
+
         session::flash('message', 'category created successfully');
         session::flash('alert-class', 'alert-success');
 

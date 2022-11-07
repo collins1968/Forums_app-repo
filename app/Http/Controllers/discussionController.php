@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\forum;
 use App\Models\discussion;
 use App\Models\discussionReply;
+use App\Models\user;
+use App\Notifications\NewReply;
+use App\Notifications\NewTopic;
 
 
 class discussionController extends Controller
@@ -53,6 +56,11 @@ class discussionController extends Controller
             $topic->notify = $notify;
 
             $topic->save();
+            $latestTopic = discussion::latest()->first();
+            $admins = User::where('is_admin', 1)->get();
+            foreach($admins as $admin){
+            $admin->notify(new NewTopic($latestTopic));
+        }
             return back();
     }
 
@@ -124,8 +132,15 @@ class discussionController extends Controller
         $reply->discussion_id = $id;
 
         $reply->save();
+
+        $latestReply = discussionReply::latest()->first();
+            $admins = User::where('is_admin', 1)->get();
+            foreach($admins as $admin){
+            $admin->notify(new NewReply($latestReply));
+            }
+
         toastr()->success('Reply saved successfully');
         return back();
          
     }
-}
+    }
